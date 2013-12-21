@@ -1,0 +1,21 @@
+﻿<Window x:Class="EnvironmentVariablesWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ev="clr-namespace:EnvironmentVariablesWPF.View"
+        Title="Environment Variables WPF" Height="350" Width="525"
+        Closed="Window_Closed" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Header="User Variables">
+            <ev:EnvironmentVariablesView x:Name="UserVariablesView"/>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Header="Machine Variables">
+            <ev:EnvironmentVariablesView x:Name="MachineVariablesView"/>
+        </GroupBox>
+        <Button Grid.Row="2" Content="Apply" Background="LightGreen" Click="Apply_Click"/>
+    </Grid>
+</Window>

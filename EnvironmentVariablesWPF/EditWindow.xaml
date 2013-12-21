@@ -1,0 +1,17 @@
+﻿<Window x:Class="EnvironmentVariablesWPF.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit or Add, do you know?" WindowState="Maximized">
+    <StackPanel>
+        <GroupBox Header="Name">
+            <TextBox Text="{Binding Name}"/>
+        </GroupBox>
+        <GroupBox Header="Value">
+            <TextBox Text="{Binding Value}"/>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Valid" Click="Valid_Click"/>
+            <Button Content="Cancel" Click="Cancel_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
