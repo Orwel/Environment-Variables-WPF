@@ -34,8 +34,10 @@ namespace EnvironmentVariablesWPF
             {
                 StaticEnvironment.AdminPrivilege = true;
             }
-            UserVariablesView.Display(StaticEnvironment.listVariablesUser, false);
-            MachineVariablesView.Display(StaticEnvironment.listVariablesMachine, !StaticEnvironment.AdminPrivilege);
+            SearchEngine.selectedUserVariables = new ListSelectedVariables(StaticEnvironment.listVariablesUser);
+            SearchEngine.selectedMachineVariables = new ListSelectedVariables(StaticEnvironment.listVariablesMachine);
+            UserVariablesView.Display(SearchEngine.selectedUserVariables, false);
+            MachineVariablesView.Display(SearchEngine.selectedMachineVariables, !StaticEnvironment.AdminPrivilege);
         }
 
         /// <summary>
@@ -56,6 +58,18 @@ namespace EnvironmentVariablesWPF
                 if (MessageBox.Show("Before exit this programm, do you want apply this modification to registre?", 
                     "Some modification will be lose", MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     StaticEnvironment.ApplyToRegistre();
+        }
+
+        /// <summary>
+        /// Real time to search engine. Each modified text drag along a new search.
+        /// </summary>
+        private void TextBoxSearchEngine_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                SearchEngine.Select(textBox.Text);
+            }
         }
     }
 }

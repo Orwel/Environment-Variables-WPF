@@ -21,9 +21,15 @@ namespace EnvironmentVariablesWPF.View
     /// </summary>
     public partial class EnvironmentVariablesView : UserControl
     {
+        /// <summary>
+        /// If true, this view will only display environement variable.
+        /// The buttons to modify will be disabled and a warning message will be displayed.
+        /// </summary>
         private bool readOnly = false;
 
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public EnvironmentVariablesView()
         {
             InitializeComponent();
@@ -34,7 +40,7 @@ namespace EnvironmentVariablesWPF.View
         /// </summary>
         /// <param name="source">List of environment variables</param>
         /// <param name="readOnly">True, display warning message. False, button to edit is visible.</param>
-        public void Display(ListEnvironmentVariables source, bool readOnly)
+        public void Display(ListSelectedVariables source, bool readOnly)
         {
             DataGridVariables.ItemsSource = source;
             if (readOnly)
@@ -50,14 +56,14 @@ namespace EnvironmentVariablesWPF.View
         /// </summary>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            var listVariables = DataGridVariables.ItemsSource as ListEnvironmentVariables;
-            if (listVariables != null)
+            var selectedVariables = DataGridVariables.ItemsSource as ListSelectedVariables;
+            if (selectedVariables != null)
             {
                 EnvironmentVariable variable = new EnvironmentVariable();
                 var EditWin = new EditWindow();
                 EditWin.DataContext = variable;
                 if (EditWin.ShowDialog() == true)
-                    listVariables.Add(variable);
+                    selectedVariables.AddToOriginalList(variable);
             }
         }
 
@@ -74,12 +80,12 @@ namespace EnvironmentVariablesWPF.View
         /// </summary>
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            var listVariables = DataGridVariables.ItemsSource as ListEnvironmentVariables;
+            var listVariables = DataGridVariables.ItemsSource as ListSelectedVariables;
             if (listVariables != null)
             {
                 var variable = DataGridVariables.SelectedItem as EnvironmentVariable;
                 if (variable != null)
-                    listVariables.Remove(variable);
+                    listVariables.RemoveToRefList(variable);
                 else
                     MessageBox.Show("Any selected variable","Error",MessageBoxButton.OK,MessageBoxImage.Error);
             }
@@ -87,7 +93,7 @@ namespace EnvironmentVariablesWPF.View
 
         private void EditVariable()
         {
-            var listVariables = DataGridVariables.ItemsSource as ListEnvironmentVariables;
+            var listVariables = DataGridVariables.ItemsSource as ListSelectedVariables;
             if (listVariables != null)
             {
                 var selectedVariable = DataGridVariables.SelectedItem as EnvironmentVariable;
