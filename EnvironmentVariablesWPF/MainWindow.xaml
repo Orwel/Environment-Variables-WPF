@@ -6,16 +6,20 @@
         Closed="Window_Closed" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="User Variables">
+        <GroupBox Grid.Row="0" Header="Search Engine">
+            <TextBox Name="TextBoxSearchEngine" TextChanged="TextBoxSearchEngine_TextChanged"/>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Header="User Variables">
             <ev:EnvironmentVariablesView x:Name="UserVariablesView"/>
         </GroupBox>
-        <GroupBox Grid.Row="1" Header="Machine Variables">
+        <GroupBox Grid.Row="2" Header="Machine Variables">
             <ev:EnvironmentVariablesView x:Name="MachineVariablesView"/>
         </GroupBox>
-        <Button Grid.Row="2" Content="Apply" Background="LightGreen" Click="Apply_Click"/>
+        <Button Grid.Row="3" Content="Apply" Background="LightGreen" Click="Apply_Click"/>
     </Grid>
 </Window>
