@@ -4,10 +4,17 @@
         Title="Edit or Add, do you know?" WindowState="Maximized">
     <StackPanel>
         <GroupBox Header="Name">
-            <TextBox Text="{Binding Name}"/>
+            <TextBox Name="NameBox"/>
         </GroupBox>
         <GroupBox Header="Value">
-            <TextBox Text="{Binding Value}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="ValueBox" TextWrapping="Wrap" TextChanged="ValueBox_TextChanged" />
+                <TextBox Grid.Column="1" MaxLength="1" Margin="5,0,0,0" TextChanged="Separator_TextChanged"/>
+            </Grid>
         </GroupBox>
         <StackPanel Orientation="Horizontal">
             <Button Content="Valid" Click="Valid_Click"/>

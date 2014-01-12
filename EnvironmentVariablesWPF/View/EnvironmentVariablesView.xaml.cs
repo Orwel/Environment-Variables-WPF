@@ -59,11 +59,9 @@ namespace EnvironmentVariablesWPF.View
             var selectedVariables = DataGridVariables.ItemsSource as ListSelectedVariables;
             if (selectedVariables != null)
             {
-                EnvironmentVariable variable = new EnvironmentVariable();
                 var EditWin = new EditWindow();
-                EditWin.DataContext = variable;
                 if (EditWin.ShowDialog() == true)
-                    selectedVariables.AddToOriginalList(variable);
+                    selectedVariables.AddToOriginalList(new EnvironmentVariable(EditWin.Name,EditWin.Value));
             }
         }
 
@@ -101,15 +99,11 @@ namespace EnvironmentVariablesWPF.View
                     MessageBox.Show("Any selected variable", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
-                    EnvironmentVariable variable = new EnvironmentVariable();
-                    variable.Name = selectedVariable.Name;
-                    variable.Value = selectedVariable.Value;
-                    var EditWin = new EditWindow();
-                    EditWin.DataContext = variable;
+                    var EditWin = new EditWindow(selectedVariable.Name,selectedVariable.Value);
                     if (EditWin.ShowDialog() == true)
                     {
-                        selectedVariable.Name = variable.Name;
-                        selectedVariable.Value = variable.Value;
+                        selectedVariable.Name = EditWin.Name;
+                        selectedVariable.Value = EditWin.Value;
                     }
                 }
             }
