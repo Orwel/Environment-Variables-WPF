@@ -27,7 +27,7 @@ namespace EnvironmentVariablesWPF
 
         #region Getter/Setter
         public new string Name { get { return NameBox.Text; } }
-        public string Value { get { return ValueBox.Text; } }
+        public string Value { get { return ValueBox.Text.Replace("\n",""); } }
         #endregion
 
         /// <summary>
