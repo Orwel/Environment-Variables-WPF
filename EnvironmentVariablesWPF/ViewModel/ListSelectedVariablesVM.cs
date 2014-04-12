@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EnvironmentVariablesWPF.BO;
+using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EnvironmentVariablesWPF.Model
+
+namespace EnvironmentVariablesWPF.ViewModel
 {
     /// <summary>
     /// List of selected variable from search engine.
     /// </summary>
-    public class ListSelectedVariables : BindingList<EnvironmentVariable>
+    public class ListSelectedVariablesVM : BindingList<EnvironmentVariableVM>
     {
         /// <summary>
         /// Initial list.
@@ -26,7 +25,7 @@ namespace EnvironmentVariablesWPF.Model
         /// Constructor
         /// </summary>
         /// <param name="_refList">Ref. to use in search engine.</param>
-        public ListSelectedVariables(ListEnvironmentVariables _refList)
+        public ListSelectedVariablesVM(ListEnvironmentVariables _refList)
         {
             refList = _refList;
             Refresh();
@@ -40,16 +39,19 @@ namespace EnvironmentVariablesWPF.Model
             Clear();
             if (String.IsNullOrEmpty(searchStr))
             {
-                foreach (var variable in refList)
-                    Add(variable);
+                foreach(var variable in refList)
+                {
+                    this.Add(new EnvironmentVariableVM(variable));
+                }
             }
             else
             {
-                foreach (var variable in refList)
+                var selectVariables = refList.Where
+                           (v => (v.Name.IndexOf(searchStr, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                            v.Value.IndexOf(searchStr, StringComparison.OrdinalIgnoreCase) >= 0));
+                foreach (var variable in selectVariables)
                 {
-                    if (variable.Name.IndexOf(searchStr, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                        variable.Value.IndexOf(searchStr, StringComparison.OrdinalIgnoreCase) >= 0)
-                        Add(variable);
+                    this.Add(new EnvironmentVariableVM(variable));
                 }
             }
         }

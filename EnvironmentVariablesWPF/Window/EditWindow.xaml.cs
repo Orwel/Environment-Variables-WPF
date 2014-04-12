@@ -1,4 +1,4 @@
-﻿using EnvironmentVariablesWPF.Model;
+﻿using EnvironmentVariablesWPF.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace EnvironmentVariablesWPF
+namespace EnvironmentVariablesWPF.Windows
 {
     /// <summary>
     /// Logique d'interaction pour EditWindow.xaml

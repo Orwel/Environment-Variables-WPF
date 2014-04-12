@@ -51,6 +51,9 @@
   <PropertyGroup>
     <ApplicationIcon>EnvironmentVariablesWPF.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -71,7 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="EditWindow.xaml">
+    <Page Include="Window\EditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -79,7 +82,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Window\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -87,18 +90,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EditWindow.xaml.cs">
+    <Compile Include="BLL\AdminRight.cs" />
+    <Compile Include="DAL\EnvironmentVariablesReader.cs" />
+    <Compile Include="DAL\EnvironmentVariablesWriter.cs" />
+    <Compile Include="Window\EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\EnvironmentVariable.cs" />
-    <Compile Include="Model\ListSelectedVariables.cs" />
-    <Compile Include="Model\SearchEngine.cs" />
-    <Compile Include="Model\StaticEnvironment.cs" />
+    <Compile Include="BO\EnvironmentVariable.cs" />
+    <Compile Include="ViewModel\ListSelectedVariablesVM.cs" />
+    <Compile Include="ViewModel\SearchEngineVM.cs" />
+    <Compile Include="BLL\StaticEnvironment.cs" />
+    <Compile Include="ViewModel\EnvironmentVariableVM.cs" />
     <Compile Include="View\EnvironmentVariablesView.xaml.cs">
       <DependentUpon>EnvironmentVariablesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\ListEnvironmentVariables.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="BO\ListEnvironmentVariables.cs" />
+    <Compile Include="Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -152,6 +159,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

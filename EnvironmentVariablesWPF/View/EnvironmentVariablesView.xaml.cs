@@ -1,4 +1,6 @@
-﻿using EnvironmentVariablesWPF.Model;
+﻿using EnvironmentVariablesWPF.BO;
+using EnvironmentVariablesWPF.ViewModel;
+using EnvironmentVariablesWPF.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +41,11 @@ namespace EnvironmentVariablesWPF.View
         /// Display the list of environment variables in view.
         /// </summary>
         /// <param name="source">List of environment variables</param>
-        /// <param name="readOnly">True, display warning message. False, button to edit is visible.</param>
-        public void Display(ListSelectedVariables source, bool readOnly)
+        /// <param name="readOnly">
+        /// True, display warning message. 
+        /// False, button to edit is visible.
+        /// </param>
+        public void Display(ListSelectedVariablesVM source, bool readOnly)
         {
             DataGridVariables.ItemsSource = source;
             if (readOnly)
@@ -56,7 +61,7 @@ namespace EnvironmentVariablesWPF.View
         /// </summary>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            var selectedVariables = DataGridVariables.ItemsSource as ListSelectedVariables;
+            var selectedVariables = DataGridVariables.ItemsSource as ListSelectedVariablesVM;
             if (selectedVariables != null)
             {
                 var EditWin = new EditWindow();
@@ -78,7 +83,7 @@ namespace EnvironmentVariablesWPF.View
         /// </summary>
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            var listVariables = DataGridVariables.ItemsSource as ListSelectedVariables;
+            var listVariables = DataGridVariables.ItemsSource as ListSelectedVariablesVM;
             if (listVariables != null)
             {
                 var variable = DataGridVariables.SelectedItem as EnvironmentVariable;
@@ -91,7 +96,7 @@ namespace EnvironmentVariablesWPF.View
 
         private void EditVariable()
         {
-            var listVariables = DataGridVariables.ItemsSource as ListSelectedVariables;
+            var listVariables = DataGridVariables.ItemsSource as ListSelectedVariablesVM;
             if (listVariables != null)
             {
                 var selectedVariable = DataGridVariables.SelectedItem as EnvironmentVariable;

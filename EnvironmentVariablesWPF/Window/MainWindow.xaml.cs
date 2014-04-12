@@ -1,21 +1,11 @@
-﻿using EnvironmentVariablesWPF.Model;
+﻿using EnvironmentVariablesWPF.BLL;
+using EnvironmentVariablesWPF.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace EnvironmentVariablesWPF
+namespace EnvironmentVariablesWPF.Windows
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
@@ -28,16 +18,11 @@ namespace EnvironmentVariablesWPF
         public MainWindow()
         {
             InitializeComponent();
-            WindowsIdentity user = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(user);
-            if (principal.IsInRole(WindowsBuiltInRole.Administrator) == true)
-            {
-                StaticEnvironment.AdminPrivilege = true;
-            }
-            SearchEngine.selectedUserVariables = new ListSelectedVariables(StaticEnvironment.listVariablesUser);
-            SearchEngine.selectedMachineVariables = new ListSelectedVariables(StaticEnvironment.listVariablesMachine);
-            UserVariablesView.Display(SearchEngine.selectedUserVariables, false);
-            MachineVariablesView.Display(SearchEngine.selectedMachineVariables, !StaticEnvironment.AdminPrivilege);
+           
+            var searchEngine = new SearchEngineVM();
+            this.DataContext = searchEngine;
+            UserVariablesView.Display(searchEngine.selectedUserVariables, false);
+            MachineVariablesView.Display(searchEngine.selectedMachineVariables, !AdminRight.IsAdmin());
         }
 
         /// <summary>
@@ -66,10 +51,11 @@ namespace EnvironmentVariablesWPF
         private void TextBoxSearchEngine_TextChanged(object sender, TextChangedEventArgs e)
         {
             var textBox = sender as TextBox;
-            if (textBox != null)
-            {
-                SearchEngine.Select(textBox.Text);
-            }
+            if (textBox == null)
+                return;
+            var searchEngine = this.DataContext as SearchEngineVM;
+            if(searchEngine != null)
+                searchEngine.Select(textBox.Text);
         }
     }
 }
