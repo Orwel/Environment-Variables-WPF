@@ -26,7 +26,13 @@ namespace EnvironmentVariablesWPF.Windows
         private char separator = '\0';
 
         #region Getter/Setter
+        /// <summary>
+        /// Name entry by user in EditWindow.
+        /// </summary>
         public new string Name { get { return NameBox.Text; } }
+        /// <summary>
+        /// Value entry by user in EditWindow.
+        /// </summary>
         public string Value { get { return ValueBox.Text.Replace("\n",""); } }
         #endregion
 
@@ -77,21 +83,28 @@ namespace EnvironmentVariablesWPF.Windows
         /// </summary>
         private void Separator_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var SeparatorBox = sender as TextBox;
-            if (SeparatorBox != null)
+            try
             {
-                if (!String.IsNullOrEmpty(SeparatorBox.Text))
+                var SeparatorBox = sender as TextBox;
+                if (SeparatorBox != null)
                 {
-                    separator = SeparatorBox.Text.Last(); ;
-                    SeparatorBox.Text = ""+separator;
+                    if (!String.IsNullOrEmpty(SeparatorBox.Text))
+                    {
+                        separator = SeparatorBox.Text.Last(); ;
+                        SeparatorBox.Text = "" + separator;
+                    }
+                    else
+                    {
+                        separator = '\0';
+                        ValueBox.Text = ValueBox.Text.Replace("\n", "");
+                    }
                 }
-                else
-                {
-                    separator = '\0';
-                    ValueBox.Text = ValueBox.Text.Replace("\n","");
-                }
+                AdapterText();
             }
-            AdapterText();
+            catch (Exception ex)
+            {
+                MessageRepporting.ExceptionNoHandled(ex); 
+            }
         }
 
         /// <summary>
@@ -101,7 +114,14 @@ namespace EnvironmentVariablesWPF.Windows
         /// </summary>
         private void ValueBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            AdapterText();
+            try
+            {
+                AdapterText();
+            }
+            catch (Exception ex)
+            {
+                MessageRepporting.ExceptionNoHandled(ex); 
+            }
         }
 
         /// <summary>

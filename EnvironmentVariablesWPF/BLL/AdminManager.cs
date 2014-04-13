@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace EnvironmentVariablesWPF.BLL
 {
-    public static class AdminRight
+    /// <summary>
+    /// Mangager of Admin right.
+    /// Can determine if currennt user have admin right.
+    /// </summary>
+    public static class AdminRigthManager
     {
+        /// <summary>
+        /// Return true if the current user of program have admin right.
+        /// </summary>
+        /// <returns>True if the current user of program have admin right.</returns>
         public static bool IsAdmin()
         {
             WindowsIdentity user = WindowsIdentity.GetCurrent();

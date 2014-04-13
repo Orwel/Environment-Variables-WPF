@@ -1,6 +1,7 @@
 ﻿<Window x:Class="EnvironmentVariablesWPF.Windows.EditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Icon="/EnvironmentVariablesWPF.ico"
         Title="Edit or Add, do you know?" WindowState="Maximized">
     <StackPanel>
         <GroupBox Header="Name">

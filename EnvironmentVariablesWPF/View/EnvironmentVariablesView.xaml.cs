@@ -96,10 +96,10 @@ namespace EnvironmentVariablesWPF.View
 
         private void EditVariable()
         {
-            var listVariables = DataGridVariables.ItemsSource as ListSelectedVariablesVM;
+            var listVariables = this.DataGridVariables.ItemsSource as ListSelectedVariablesVM;
             if (listVariables != null)
             {
-                var selectedVariable = DataGridVariables.SelectedItem as EnvironmentVariable;
+                var selectedVariable = this.DataGridVariables.SelectedItem as EnvironmentVariableVM;
                 if (selectedVariable == null)
                     MessageBox.Show("Any selected variable", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 else

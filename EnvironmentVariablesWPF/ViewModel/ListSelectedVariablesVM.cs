@@ -67,12 +67,20 @@ namespace EnvironmentVariablesWPF.ViewModel
             Refresh();
         }
 
+        /// <summary>
+        /// Add a new environment variable to original list.
+        /// </summary>
+        /// <param name="ev">new environment variable</param>
         public void AddToOriginalList(EnvironmentVariable ev)
         {
             refList.Add(ev);
             Refresh();
         }
 
+        /// <summary>
+        /// Remove a environment variable from original list.
+        /// </summary>
+        /// <param name="ev">removed environment variable</param>
         public void RemoveToRefList(EnvironmentVariable ev)
         {
             refList.Remove(ev);

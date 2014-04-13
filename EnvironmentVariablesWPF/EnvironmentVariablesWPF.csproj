@@ -38,6 +38,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,10 +50,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\EnvironmentVariablesWPF.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>EnvironmentVariablesWPF.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
@@ -74,7 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Window\EditWindow.xaml">
+    <Page Include="Windows\EditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,7 +87,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window\MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -90,22 +95,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BLL\AdminRight.cs" />
+    <Compile Include="BLL\AdminManager.cs" />
     <Compile Include="DAL\EnvironmentVariablesReader.cs" />
     <Compile Include="DAL\EnvironmentVariablesWriter.cs" />
-    <Compile Include="Window\EditWindow.xaml.cs">
+    <Compile Include="MessageRepporting.cs" />
+    <Compile Include="Windows\EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BO\EnvironmentVariable.cs" />
     <Compile Include="ViewModel\ListSelectedVariablesVM.cs" />
     <Compile Include="ViewModel\SearchEngineVM.cs" />
-    <Compile Include="BLL\StaticEnvironment.cs" />
+    <Compile Include="BLL\EnvironmentVariableManager.cs" />
     <Compile Include="ViewModel\EnvironmentVariableVM.cs" />
     <Compile Include="View\EnvironmentVariablesView.xaml.cs">
       <DependentUpon>EnvironmentVariablesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BO\ListEnvironmentVariables.cs" />
-    <Compile Include="Window\MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

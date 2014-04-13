@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace EnvironmentVariablesWPF.DAL
 {
+    /// <summary>
+    /// Class to read the environment variables from registry.
+    /// </summary>
     public static class EnvironmentVariablesReader
     {
         /// <summary>

@@ -4,27 +4,47 @@ using EnvironmentVariablesWPF.ViewModel;
 
 namespace EnvironmentVariablesWPF.ViewModel
 {
+    /// <summary>
+    /// View model of MainWindow.
+    /// </summary>
     public class SearchEngineVM
     {
-        public ListSelectedVariablesVM selectedUserVariables = 
-            new ListSelectedVariablesVM(StaticEnvironment.listVariablesUser);
-        public ListSelectedVariablesVM selectedMachineVariables = 
-            new ListSelectedVariablesVM(StaticEnvironment.listVariablesMachine);
+        /// <summary>
+        /// List of user environment variables with a filter
+        /// </summary>
+        public ListSelectedVariablesVM SelectedUserVariables { get; private set; }
+        /// <summary>
+        /// List of machine environment variables with a filter
+        /// </summary>
+        public ListSelectedVariablesVM SelectedMachineVariables { get; private set; }
 
-        public void Select(string str)
+        /// <summary>
+        /// Default constructor.
+        /// Initialise User and Machine list of environment variables.
+        /// </summary>
+        public SearchEngineVM()
         {
-            if (selectedUserVariables != null)
-                selectedUserVariables.Select(str);
-            if (selectedMachineVariables != null)
-                selectedMachineVariables.Select(str);
+            SelectedUserVariables = new ListSelectedVariablesVM(EnvironmentVariableManager.ListUserVariables);
+            SelectedMachineVariables = new ListSelectedVariablesVM(EnvironmentVariableManager.ListMachineVariables);
         }
 
+        /// <summary>
+        /// Select the environment variables which contains the filter in it name or it value. 
+        /// </summary>
+        /// <param name="filter">Filter</param>
+        public void Select(string filter)
+        {
+            SelectedUserVariables.Select(filter);
+            SelectedMachineVariables.Select(filter);
+        }
+
+        /// <summary>
+        /// Refresh the list with the last filter.
+        /// </summary>
         public void Refresh()
         {
-            if (selectedUserVariables != null)
-                selectedUserVariables.Refresh();
-            if (selectedMachineVariables != null)
-                selectedMachineVariables.Refresh();
+            SelectedUserVariables.Refresh();
+            SelectedMachineVariables.Refresh();
         }
     }
 }
