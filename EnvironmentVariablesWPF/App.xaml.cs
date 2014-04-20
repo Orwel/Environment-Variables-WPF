@@ -22,14 +22,17 @@ namespace EnvironmentVariablesWPF
         /// <param name="e">Args of launch</param>
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Console.SetError(new StreamWriter("stderr"));
-            try
+            using (var stderr = new StreamWriter("stderr"))
             {
-                (new MainWindow()).ShowDialog();
-            }
-            catch(Exception ex)
-            {
-                Console.Error.WriteLine(ex.ToString());
+                Console.SetError(stderr);
+                try
+                {
+                    (new MainWindow()).ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex.ToString());
+                }
             }
         }
     }

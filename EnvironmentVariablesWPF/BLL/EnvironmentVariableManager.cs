@@ -9,7 +9,7 @@ namespace EnvironmentVariablesWPF.BLL
     /// <summary>
     /// Manger of environment variables.
     /// </summary>
-    static class EnvironmentVariableManager
+    public static class EnvironmentVariableManager
     {
         public static ListEnvironmentVariables ListUserVariables { get; private set; }
         public static ListEnvironmentVariables ListMachineVariables { get; private set; }

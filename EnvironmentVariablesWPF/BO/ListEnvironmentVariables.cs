@@ -31,12 +31,7 @@ namespace EnvironmentVariablesWPF.BO
         {
             get
             {
-                foreach (var current in this)
-                {
-                    if (current.Name == name)
-                        return current;
-                }
-                return null;
+                return this.Find(e => e.Name == name);
             }
         }
         #endregion
@@ -48,6 +43,15 @@ namespace EnvironmentVariablesWPF.BO
         public ListEnvironmentVariables(EnvironmentVariableTarget target)
         {
             this.Target = target;
+        }
+
+        /// <summary>
+        /// Remove a environment variable from it name.
+        /// </summary>
+        /// <param name="name">Environment variable's name</param>
+        public void Remove(string name)
+        {
+            this.RemoveAll(ev => ev.Name == name);
         }
 
         /// <summary>
