@@ -104,7 +104,7 @@
     </Compile>
     <Compile Include="BO\EnvironmentVariable.cs" />
     <Compile Include="ViewModel\ListSelectedVariablesVM.cs" />
-    <Compile Include="ViewModel\SearchEngineVM.cs" />
+    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="BLL\EnvironmentVariableManager.cs" />
     <Compile Include="ViewModel\EnvironmentVariableVM.cs" />
     <Compile Include="View\EnvironmentVariablesView.xaml.cs">

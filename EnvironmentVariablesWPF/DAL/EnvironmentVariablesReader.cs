@@ -61,7 +61,7 @@ namespace EnvironmentVariablesWPF.DAL
             var dicVariables = Environment.GetEnvironmentVariables(variables.Target);
             foreach (DictionaryEntry variable in dicVariables)
             {
-                variables.Add(new EnvironmentVariable((string)variable.Key, (string)variable.Value));
+                variables.Add(new EnvironmentVariable(variables.Target, (string)variable.Key, (string)variable.Value));
             }
         }
 
@@ -71,15 +71,10 @@ namespace EnvironmentVariablesWPF.DAL
         /// <returns>True if some modification is ocured.</returns>
         public static bool IsModified(ListEnvironmentVariables variables)
         {
-            var registreList = GetListEnvironmentVariables(variables.Target);
-            //If size is diffirent, then add or remove is ocured.
-            if (variables.Count != registreList.Count)
-                return true;
-            //If one (or more) variable is modified.
             foreach(var variable in variables)
-                if (!registreList.Contains(variable)) 
+                if (variable.Status != EnvironmentVariable.State.NONE)
                     return true;
-           return false;
+            return false;
         }
     }
 }

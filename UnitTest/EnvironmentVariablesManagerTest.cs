@@ -26,7 +26,7 @@ namespace UnitTest
                 Environment.SetEnvironmentVariable(addName, null,EnvironmentVariableTarget.User);
             Assert.AreEqual(null, Environment.GetEnvironmentVariable(addName, EnvironmentVariableTarget.User));
             //Test Add new environment variable
-            EnvironmentVariableManager.ListUserVariables.Add(new EnvironmentVariable(addName, addValue));
+            EnvironmentVariableManager.ListUserVariables.Add(addName, addValue);
             EnvironmentVariableManager.ApplyToRegistry();
             Assert.AreEqual(addValue,Environment.GetEnvironmentVariable(addName,EnvironmentVariableTarget.User));
             //Test Edit environment variable
@@ -34,7 +34,7 @@ namespace UnitTest
             EnvironmentVariableManager.ApplyToRegistry();
             Assert.AreEqual(editVaue, Environment.GetEnvironmentVariable(addName, EnvironmentVariableTarget.User));
             //Test Delete environment variable
-            EnvironmentVariableManager.ListUserVariables.Remove(addName);
+            EnvironmentVariableManager.ListUserVariables[addName].IsDelete = true; ;
             EnvironmentVariableManager.ApplyToRegistry();
             Assert.AreEqual(null, Environment.GetEnvironmentVariable(addName, EnvironmentVariableTarget.User));
         }

@@ -45,13 +45,31 @@ namespace EnvironmentVariablesWPF.BO
             this.Target = target;
         }
 
+        public void Add(string name, string value)
+        {
+            this.Add(new EnvironmentVariable(Target, name, value));
+        }
+
+        /// <summary>
+        /// Set deleted status to environment variable.
+        /// If the environment variable is not in resitry, it is removed from the list.
+        /// </summary>
+        /// <param name="ev">environment variable</param>
+        public new void Remove(EnvironmentVariable ev)
+        {
+            if (ev.Status == EnvironmentVariable.State.NEW)
+                base.Remove(ev);
+            else
+                ev.IsDelete = true;
+        }
+
         /// <summary>
         /// Remove a environment variable from it name.
         /// </summary>
         /// <param name="name">Environment variable's name</param>
         public void Remove(string name)
         {
-            this.RemoveAll(ev => ev.Name == name);
+            this.Remove(this[name]);
         }
 
         /// <summary>

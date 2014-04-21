@@ -71,19 +71,27 @@ namespace EnvironmentVariablesWPF.ViewModel
         /// Add a new environment variable to original list.
         /// </summary>
         /// <param name="ev">new environment variable</param>
-        public void AddToOriginalList(EnvironmentVariable ev)
+        public void AddToOriginalList(string name, string value)
         {
-            refList.Add(ev);
+            refList.Add(name,value);
             Refresh();
         }
 
-        /// <summary>
-        /// Remove a environment variable from original list.
-        /// </summary>
-        /// <param name="ev">removed environment variable</param>
-        public void RemoveToRefList(EnvironmentVariable ev)
+        protected override void RemoveItem(int index)
         {
-            refList.Remove(ev);
+            this[index].IsDelete = true;
+            refList.Remove(this[index].Name);
+            if (this[index].Status == EnvironmentVariable.State.NEW)
+                base.RemoveItem(index);
+        }
+
+        /// <summary>
+        /// Remove element in original list from it name.
+        /// </summary>
+        /// <param name="name">Environment variable's name</param>
+        public void RemoveToOrigialList(string name)
+        {
+            refList.Remove(name);
             Refresh();
         }
     }

@@ -47,5 +47,16 @@ namespace EnvironmentVariablesWPF.BLL
             return EnvironmentVariablesReader.IsModified(EnvironmentVariableManager.ListUserVariables) ||
                    EnvironmentVariablesReader.IsModified(EnvironmentVariableManager.ListMachineVariables);
         }
+
+        /// <summary>
+        /// Refresh the lists of environment variables from registry.
+        /// </summary>
+        public static void Refresh()
+        {
+            ListUserVariables.Clear();
+            ListUserVariables.AddRange(EnvironmentVariablesReader.GetUserVariables());
+            ListMachineVariables.Clear();
+            ListMachineVariables.AddRange(EnvironmentVariablesReader.GetUserVariables());
+        }
     }
 }

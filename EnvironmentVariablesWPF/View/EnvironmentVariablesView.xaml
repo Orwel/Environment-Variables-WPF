@@ -13,6 +13,17 @@
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">
                     <EventSetter Event="MouseDoubleClick" Handler="Edit_DataGrid"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Status}" Value="NEW">
+                            <Setter Property="Background" Value="LightGreen"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Status}" Value="EDIT">
+                            <Setter Property="Background" Value="Orange"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Status}" Value="DELETE">
+                            <Setter Property="Background" Value="Red"/>
+                        </DataTrigger>
+                    </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>

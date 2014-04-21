@@ -19,11 +19,34 @@ namespace EnvironmentVariablesWPF.ViewModel
         /// <summary>
         /// Name of EnvironmentVariable
         /// </summary>
-        public string Name { get { return _variable.Name; } set { _variable.Name = value; OnPropertyChanged("Name"); } }
+        public string Name 
+        { 
+            get { return _variable.Name; } 
+            set { _variable.Name = value; OnPropertyChanged("Name"); } 
+        }
         /// <summary>
         /// Value of EnvironmentVariable
         /// </summary>
-        public string Value { get { return _variable.Value; } set { _variable.Value = value; OnPropertyChanged("Value"); } }
+        public string Value 
+        { 
+            get { return _variable.Value; }
+            set { _variable.Value = value; OnPropertyChanged("Value"); OnPropertyChanged("Status"); } 
+        }
+        /// <summary>
+        /// If EnvironmentVariable is deleted in the programn.
+        /// </summary>
+        public bool IsDelete 
+        { 
+            get { return _variable.IsDelete; }
+            set { _variable.IsDelete = value; OnPropertyChanged("IsDelete"); OnPropertyChanged("Status"); } 
+        }
+        /// <summary>
+        /// State of EnvironmentVariable in the programn.
+        /// </summary>
+        public EnvironmentVariable.State Status
+        {
+            get { return _variable.Status; }
+        }
         #endregion
 
         /// <summary>

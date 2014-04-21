@@ -19,7 +19,7 @@ namespace EnvironmentVariablesWPF.Windows
         {
             InitializeComponent();
            
-            var searchEngine = new SearchEngineVM();
+            var searchEngine = new MainWindowVM();
             this.DataContext = searchEngine;
             UserVariablesView.Display(searchEngine.SelectedUserVariables, false);
             MachineVariablesView.Display(searchEngine.SelectedMachineVariables, !AdminRigthManager.IsAdmin());
@@ -32,7 +32,7 @@ namespace EnvironmentVariablesWPF.Windows
         {
             try
             {
-                EnvironmentVariableManager.ApplyToRegistry();
+                ((MainWindowVM)this.DataContext).ApplyToRegistry();
             }
             catch(Exception ex)
             {
@@ -69,13 +69,13 @@ namespace EnvironmentVariablesWPF.Windows
                 var textBox = sender as TextBox;
                 if (textBox == null)
                     return;
-                var searchEngine = this.DataContext as SearchEngineVM;
+                var searchEngine = this.DataContext as MainWindowVM;
                 if (searchEngine != null)
                     searchEngine.Select(textBox.Text);
             }
             catch (Exception ex)
             {
-                MessageRepporting.ExceptionNoHandled(ex); 
+                MessageRepporting.ExceptionNoHandled(ex);
             }
         }
     }

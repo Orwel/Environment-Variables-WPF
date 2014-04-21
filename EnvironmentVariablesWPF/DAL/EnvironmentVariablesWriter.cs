@@ -26,26 +26,19 @@ namespace EnvironmentVariablesWPF.DAL
         /// </exception>
         public static void Apply(ListEnvironmentVariables variables)
         {
-            var ListToEditOrAdd = variables.Clone();
-            var registreList = EnvironmentVariablesReader.GetListEnvironmentVariables(variables.Target);
-            var listToRemove = new List<EnvironmentVariable>();
-
-            foreach (var variable in registreList)
-            {
-                EnvironmentVariable find = ListToEditOrAdd[variable.Name];
-                if (find == null)
+            variables.ForEach(v =>
                 {
-                    listToRemove.Add(variable);
-                }
-                else
-                {
-                    if(find.Value == variable.Value)
-                        ListToEditOrAdd.Remove(find);
-                }
-            }
-            //Apply modification
-            ListToEditOrAdd.ForEach(v => Environment.SetEnvironmentVariable(v.Name, v.Value, variables.Target));
-            listToRemove.ForEach(v => Environment.SetEnvironmentVariable(v.Name, null, variables.Target));
+                    switch (v.Status)
+                    {
+                        case EnvironmentVariable.State.NEW:
+                        case EnvironmentVariable.State.EDIT:
+                            Environment.SetEnvironmentVariable(v.Name, v.Value, variables.Target);
+                            break;
+                        case EnvironmentVariable.State.DELETE:
+                            Environment.SetEnvironmentVariable(v.Name, null, variables.Target);
+                            break;
+                    }
+                });
         }
     }
 }

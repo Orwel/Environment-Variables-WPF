@@ -13,6 +13,14 @@ namespace EnvironmentVariablesWPF.BO
     /// </summary>
     public class EnvironmentVariable : IEquatable<EnvironmentVariable>
     {
+        public enum State
+        {
+            NONE,
+            NEW,
+            EDIT,
+            DELETE
+        }
+
         #region Getter/Setter
         /// <summary>
         /// Name of environment variable
@@ -22,6 +30,26 @@ namespace EnvironmentVariablesWPF.BO
         /// Value of environment variable
         /// </summary>
         public string Value { get; set; }
+        public EnvironmentVariableTarget Target { get; private set; }
+        public bool IsDelete { get; set; }
+        public State Status 
+        {
+            get 
+            {
+                if (IsDelete)
+                    return State.DELETE;
+                string registryValue = Environment.GetEnvironmentVariable(Name,Target);
+                if(registryValue == null)
+                {
+                    return State.NEW;
+                }
+                else if(registryValue != Value)
+                {
+                    return State.EDIT;
+                }
+                return State.NONE;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -29,10 +57,11 @@ namespace EnvironmentVariablesWPF.BO
         /// </summary>
         /// <param name="name">Name of environment variable</param>
         /// <param name="value">Value of environment variable</param>
-        public EnvironmentVariable(string name="", string value="")
+        public EnvironmentVariable(EnvironmentVariableTarget target,string name="", string value="")
         {
             Name = name;
             Value = value;
+            Target = target;
         }
 
         /// <summary>
