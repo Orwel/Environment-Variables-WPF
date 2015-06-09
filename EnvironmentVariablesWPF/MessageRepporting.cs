@@ -19,7 +19,7 @@ namespace EnvironmentVariablesWPF
         public static void ExceptionNoHandled(Exception ex)
         {
             Console.Error.WriteLine(ex.ToString());
-            MessageBox.Show("Some error is ocured." + Environment.NewLine + ex.Message,
+            MessageBox.Show("Some error has occurred." + Environment.NewLine + ex.Message,
                 "Operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
